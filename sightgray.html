@@ -48,6 +48,15 @@ window.onload = function() {
 		requestAnimationFrame(draw);
 	};
 	draw();
+	
+	var bkfilter;
+	canvas.onmousedown = function() {
+		bkfilter = canvas.style.filter;
+		canvas.style.filter = ""; // "invert(100%)";
+	};
+	canvas.onmouseup = function() {
+		canvas.style.filter = bkfilter;
+	};
 };
 </script>
 <style>
