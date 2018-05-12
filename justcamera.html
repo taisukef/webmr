@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+<link rel="stylesheet" href="index.css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<script>"use strict";
+window.onload = function() {
+	const medias = { audio: false, video: true };
+	
+	navigator.getUserMedia(medias, function(stream) {
+			video.srcObject = stream;
+		},
+		function(err) {
+			alert(err);
+		}
+	);
+}
+</script>
+<style>
+body {
+	margin: 0;
+}
+#video {
+	display: block;
+	width: 100%;
+}
+</style>
+<body>
+<video id="video" autoplay playsinline></video>
+</body>
+</html>

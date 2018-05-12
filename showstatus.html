@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+</head>
+<script src="fukuno.js"></script>
+<script>"use strict";
+window.onload = function() {
+	const USE_CAMERA_FRONT = false;
+//	var videoop = USE_CAMERA_FRONT ? true : { facingMode : { exact : "environment" } };
+	var videoop = USE_CAMERA_FRONT ? true : { facingMode : { ideal : "environment" } };
+	const medias = { audio: false, video: videoop };
+	
+	dump(navigator.mediaDevices.getSupportedConstraints());
+	
+	navigator.getUserMedia(medias, function(stream) {
+			video.srcObject = stream;
+		},
+		function(err) {
+			alert(err);
+		}
+	);
+	var g = canvas.getContext("2d");
+	var draw = function() {
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		g.drawImage(video, 0, 0);
+		requestAnimationFrame(draw);
+	};
+	draw();
+};
+</script>
+<style>
+body {
+	margin: 0;
+}
+#video {
+	display: block;
+	width: 100%;
+	x-transform: rotateZ(180deg);
+}
+#box {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	transform-origin: left top;
+	transform: scale(.1);
+}
+#canvas {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%; height: 100%;
+}
+#debug {
+	position: absolute;
+	background-color: rgb(1, 1, 1, 0.5);
+	z-index: 2;
+	color: white;
+}
+</style>
+<body>
+<canvas id="canvas"></canvas>
+<div id="videobox"><video id="video" autoplay playsinline></video></div>
+<div id=debug></div>
+</body>
+</html>
